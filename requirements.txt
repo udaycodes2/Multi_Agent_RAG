@@ -1,28 +1,14 @@
-# requirements.txt
-pysqlite3-binary  # Add this first
-
-# Main application framework
 streamlit
-
-# Core LangChain libraries
 langchain
-langchain-core
-langchain-community
 langgraph
-
-# Model and tool integrations
-langchain-google-genai
+langchain-community
 langchain-groq
-langchainhub
+langchain-huggingface
+faiss-cpu
+sentence-transformers
+python-dotenv
 tavily-python
-
-# Document Loaders dependencies
 pypdf
-docx2txt
-beautifulsoup4
-
-# Compatibility
-pydantic<2.0.0
-
-# Vector store
-chromadb
+torch
+transformers
+huggingface-hub

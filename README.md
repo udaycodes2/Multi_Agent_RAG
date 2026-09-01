@@ -1,201 +1,386 @@
-# 🚀 Advanced Agentic RAG 
+---
 
-A production-inspired **Multi-Agent Retrieval-Augmented Generation
-(RAG)** application built using **LangChain**, **LangGraph**,
-**Streamlit**, **ChromaDB**, and **Groq LLMs**.
+title: AI Research Assistant
+emoji: 🤖
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+sdk_version: "1.46.1"
+python_version: "3.11"
+app_file: app.py
+pinned: false
+-------------
 
-The system leverages a modular, agent-based architecture to
-intelligently retrieve, validate, and generate reliable responses from
-both private knowledge sources and real-time web data.
+# 🤖 AI Research Assistant
 
-Unlike traditional RAG applications, this project introduces **dynamic
-query routing, self-correcting retrieval, fact verification, and safety
-evaluation**, creating a more accurate and robust AI assistant.
+An intelligent, agent-powered research assistant built with **LangGraph, LangChain, Groq, FAISS, and Streamlit**.
 
-------------------------------------------------------------------------
+The application can perform **live web research**, analyze **uploaded PDF documents**, retrieve relevant information using **Retrieval-Augmented Generation (RAG)**, and generate structured, source-backed research reports.
 
-# ✨ Features
+---
 
-## 🤖 Multi-Agent Architecture
+## ✨ Features
 
-The application consists of specialized AI agents:
+* 🌐 **Live Web Research** using Tavily Search
+* 📄 **PDF Question Answering** with RAG
+* 🧠 **Agentic Research Workflow** powered by LangGraph
+* 📊 **Structured Research Reports**
+* 🔍 **Semantic Search** using FAISS vector search
+* 📚 **Source Attribution** for research responses
+* 📝 **Multi-step Research Planning**
+* 💡 **Intelligent Recommendations and Analysis**
+* 🖥️ **Interactive Streamlit Interface**
+* 📂 Support for **multiple PDF uploads**
 
--   **Router Agent** -- Determines the best workflow for each query.
--   **Retriever Agent** -- Retrieves relevant information from the
-    knowledge base.
--   **Query Reformulator** -- Rewrites unclear queries for better
-    retrieval.
--   **Web Search Agent** -- Retrieves real-time information using
-    Tavily.
--   **Synthesizer Agent** -- Combines information from multiple sources.
--   **Response Generator** -- Produces context-aware answers using Groq
-    LLMs.
--   **Fact Checker** -- Verifies factual claims using live web search.
--   **Safety Checker** -- Detects unsafe or harmful content.
--   **Clarifier Agent** -- Requests additional user input when
-    necessary.
+---
 
-------------------------------------------------------------------------
+## 🚀 What Can It Do?
 
-# 📚 Hybrid Knowledge Retrieval
+### 🌐 Web Research
 
-Supports multiple knowledge sources:
+Enter any research topic and the assistant performs a multi-step research workflow to gather and analyze information.
 
--   PDF
--   DOCX
--   TXT
--   Website URLs
+The generated report can include:
 
-Documents are embedded into **ChromaDB** for semantic retrieval, while
-external information is fetched dynamically through Tavily Search.
+* Executive Summary
+* Key Findings
+* Detailed Analysis
+* Important Insights
+* Recommendations
+* Conclusion
+* Source References
 
-------------------------------------------------------------------------
+Example queries:
 
-# 🔄 Workflow
+* *Latest trends in Artificial Intelligence*
+* *Compare LangChain and LlamaIndex*
+* *Future of autonomous agents*
+* *Market analysis of electric vehicles*
+* *Impact of generative AI on software development*
 
-``` text
-                User
-                  │
-                  ▼
-           Router Agent
-                  │
-      ┌───────────┴───────────┐
-      ▼                       ▼
-Retriever Agent        Web Search Agent
-      │                       │
-      └───────────┬───────────┘
-                  ▼
-          Synthesizer Agent
-                  ▼
-        Response Generator
-                  ▼
-          Fact Checker
-                  ▼
-         Safety Checker
-                  ▼
-              Final Answer
+---
+
+### 📄 PDF Research
+
+Upload one or more PDF documents and ask questions about their contents.
+
+The system:
+
+1. Extracts text from uploaded PDFs
+2. Splits documents into meaningful chunks
+3. Converts chunks into vector embeddings
+4. Stores embeddings in a FAISS vector database
+5. Retrieves the most relevant context
+6. Generates a contextual AI response
+7. Provides source references
+
+This allows you to ask questions without manually reading through entire documents.
+
+---
+
+## 🏗️ Architecture
+
+### Web Research Pipeline
+
+```text
+User Query
+    │
+    ▼
+Planner Agent
+    │
+    ▼
+Web Search (Tavily)
+    │
+    ▼
+Research Aggregation
+    │
+    ▼
+Critic / Evaluation Agent
+    │
+    ▼
+Final Report Generation
+    │
+    ▼
+Response with Sources
 ```
 
-------------------------------------------------------------------------
+---
 
-# 🛠️ Tech Stack
+### PDF Research Pipeline
+
+```text
+Upload PDF
+    │
+    ▼
+PDF Text Extraction
+    │
+    ▼
+Document Chunking
+    │
+    ▼
+Embedding Generation
+    │
+    ▼
+FAISS Vector Store
+    │
+    ▼
+Similarity Search
+    │
+    ▼
+Relevant Context Retrieval
+    │
+    ▼
+LLM Response
+    │
+    ▼
+Source References
+```
+
+---
+
+## 🧰 Tech Stack
 
 ### Frontend
 
--   Streamlit
+* Streamlit
 
-### AI Framework
+### AI & LLM
 
--   LangChain
--   LangGraph
+* Groq API
+* Qwen 3.6 27B
 
-### LLM
+### Agent Framework
 
--   Groq
+* LangChain
+* LangGraph
 
-### Embeddings
+### Retrieval & Vector Search
 
--   Google Generative AI Embeddings
+* FAISS
+* HuggingFace Embeddings
+* `sentence-transformers/all-MiniLM-L6-v2`
 
-### Vector Database
+### Web Search
 
--   ChromaDB
+* Tavily Search API
 
-### Search
+### PDF Processing
 
--   Tavily Search API
+* PyPDFLoader
+* RecursiveCharacterTextSplitter
 
-------------------------------------------------------------------------
+### Programming Language
 
-# ⚙️ Installation
+* Python 3.11
 
-``` bash
-git clone https://github.com/Tirth1411/advanced-agentic-rag.git
-cd advanced-agentic-rag
+---
+
+## 📁 Project Structure
+
+```text
+AI-Research-Assistant/
+│
+├── app.py                 # Streamlit application
+├── graph.py               # LangGraph agent workflow
+├── rag.py                 # RAG and document retrieval logic
+├── tools.py               # Search and utility tools
+├── requirements.txt       # Project dependencies
+│
+├── uploads/               # Uploaded PDF documents
+├── faiss_index/           # FAISS vector database
+│
+└── README.md              # Project documentation
 ```
 
-Create a virtual environment:
+---
 
-``` bash
+## ⚙️ Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/AI-Research-Assistant.git
+```
+
+### 2. Navigate to the Project Directory
+
+```bash
+cd AI-Research-Assistant
+```
+
+### 3. Create a Virtual Environment
+
+```bash
 python -m venv venv
 ```
 
-Windows:
+### 4. Activate the Virtual Environment
 
-``` bash
+#### Windows
+
+```bash
 venv\Scripts\activate
 ```
 
-Linux / macOS:
+#### Linux / macOS
 
-``` bash
+```bash
 source venv/bin/activate
 ```
 
-Install dependencies:
+### 5. Install Dependencies
 
-``` bash
+```bash
 pip install -r requirements.txt
 ```
 
-------------------------------------------------------------------------
+---
 
-# 🔑 API Keys
+## 🔑 Environment Variables
 
-Create:
+Create a `.env` file in the project root directory:
 
-``` text
-.streamlit/secrets.toml
+```env
+GROQ_API_KEY=your_groq_api_key
+TAVILY_API_KEY=your_tavily_api_key
 ```
 
-Add:
+Make sure you have valid API keys before running the application.
 
-``` toml
-LANGCHAIN_API_KEY = "YOUR_KEY"
-TAVILY_API_KEY = "YOUR_KEY"
-GOOGLE_API_KEY = "YOUR_KEY"
-GROQ_API_KEY = "YOUR_KEY"
+> ⚠️ Never commit your `.env` file or API keys to a public repository.
+
+You can also add the following to your `.gitignore` file:
+
+```text
+.env
+venv/
+__pycache__/
+uploads/
+faiss_index/
 ```
 
-------------------------------------------------------------------------
+---
 
-# ▶️ Run
+## ▶️ Run the Application
 
-``` bash
+Start the Streamlit application with:
+
+```bash
 streamlit run app.py
 ```
 
-------------------------------------------------------------------------
+Then open the local URL displayed in your terminal.
 
-# ⚙️ Configurable Parameters
+---
 
--   Chunk Size
--   Chunk Overlap
--   Retriever Top-K
--   LLM Temperature
+## 💡 Example Use Cases
 
-------------------------------------------------------------------------
+The AI Research Assistant can be used for:
 
-# 🚀 Future Improvements
+* 📚 Research paper summarization
+* 🔬 Technical research
+* 🤖 AI and technology trend analysis
+* 📈 Market research
+* 💰 Investment research
+* ⚔️ Technology comparisons
+* 📄 Technical documentation analysis
+* 🧠 Knowledge extraction from PDFs
+* 📊 Business and strategy research
+* 🛍️ Product comparisons
+* 📋 Budget and planning assistance
+* 💡 Recommendation generation
 
--   FastAPI backend
--   Docker support
--   Authentication
--   Chat history database
--   CI/CD pipeline
--   Hybrid Search (BM25 + Vector Search)
--   LangSmith Observability
--   Cloud Deployment
+---
 
+## 🧠 How the Agent Workflow Works
 
-------------------------------------------------------------------------
+The application uses an agent-based workflow to improve the quality of research responses.
 
-# 🙏 Acknowledgements
+### 1. Planning
 
--   LangChain
--   LangGraph
--   Streamlit
--   Groq
--   Google Generative AI
--   Tavily
--   ChromaDB
+The planner analyzes the user's query and determines the information required.
+
+### 2. Research
+
+Relevant information is collected through web search or document retrieval.
+
+### 3. Aggregation
+
+The retrieved information is combined and organized into useful context.
+
+### 4. Evaluation
+
+The workflow evaluates the collected research and identifies missing or weak information.
+
+### 5. Report Generation
+
+The LLM generates a structured and readable final response with relevant sources.
+
+---
+
+## 🔮 Future Improvements
+
+Planned improvements include:
+
+* 💬 Conversation memory
+* 🤝 Multi-agent parallel research
+* ⚡ Streaming responses
+* 🖼️ Image and chart understanding
+* 📌 Improved citation ranking
+* 📄 Export research reports as PDF
+* 🕒 Persistent chat history
+* ☁️ Improved cloud deployment
+* 🔐 User authentication
+* 🗂️ Support for additional document formats
+* 📊 Automatic data visualization
+* 🔎 Advanced research filtering
+
+---
+
+## 🎯 Project Goals
+
+The goal of this project is to demonstrate how modern AI technologies can be combined to build a practical research assistant using:
+
+* Large Language Models
+* Agentic workflows
+* Retrieval-Augmented Generation
+* Vector databases
+* Semantic search
+* Live web search
+* Interactive user interfaces
+
+---
+
+## 🤝 Contributing
+
+Contributions, ideas, and improvements are welcome.
+
+If you would like to contribute:
+
+1. Fork the repository
+2. Create a new branch
+3. Make your changes
+4. Commit your changes
+5. Open a pull request
+
+---
+
+## 📜 License
+
+This project is intended for **educational, learning, and portfolio purposes**.
+
+If you plan to use this project commercially, make sure to review the licenses and terms of the third-party libraries, APIs, models, and services used in the project.
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving the repository a **star ⭐**.
+
+It helps others discover the project and motivates further improvements.
+
+---
+
+<p align="center">
+  Built with ❤️ using Python, LangChain, LangGraph, Groq, FAISS, and Streamlit.
+</p>
