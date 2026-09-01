@@ -1,4 +1,4 @@
-# 🚀 Advanced Agentic RAG System
+# 🚀 Advanced Agentic RAG 
 
 A production-inspired **Multi-Agent Retrieval-Augmented Generation
 (RAG)** application built using **LangChain**, **LangGraph**,
